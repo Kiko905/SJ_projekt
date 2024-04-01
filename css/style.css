@@ -1,0 +1,276 @@
+html{
+    scroll-behavior: smooth;
+}
+
+body{
+        background-image: url("../img/beanstalk-dark.png")!important;
+        background-size: cover!important;
+        background-position: center!important;
+        background-repeat: no-repeat!important;
+        padding-top: 140px!important;
+}
+
+.navbar{        
+        background-color: #add8e6!important; 
+        backdrop-filter: blur(100px)!important;
+        border-radius: 55px;
+        z-index: 1000!important;
+        position: fixed!important;
+        width: 100%!important;
+}
+
+.navbar a:hover{
+        color: white!important;
+}
+
+.navbar:visited{
+        color: white!important;
+}
+
+.nav-item:active .nav-link{
+        color: white!important;
+}
+
+.nav-item.active .nav-link:hover {
+        color: white !important;
+}
+
+.collapse .nav-link:hover {
+        color: white !important; 
+}      
+
+.jumbotron {
+        background-color: #add8e6 !important; 
+        color: black !important;
+        border-radius: 30px;
+}
+
+.jumbotron .display-4,
+.jumbotron .lead {
+        color: black !important;
+        text-decoration: underline;
+}
+
+.jumbotron a.btn {
+        color: #add8e6; 
+        background-color: white;
+        border-color: white;
+}
+
+.jumbotron a.btn:hover {
+        color: white;
+        background-color: #add8e6; 
+        border-color: white;
+}
+
+.card {
+        border-color: #add8e6!important; 
+        border-radius: 55px;  
+        margin-bottom: 20px;
+}
+
+.card .card-title {
+        color: #add8e6; 
+}
+
+.card .btn {
+        color: #add8e6; 
+        background-color: white;
+        border-color: #add8e6; 
+}
+
+.card .btn:hover {
+        color: white;
+        background-color: #add8e6; 
+        border-color: white;
+}
+.footer {
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #add8e6!important;
+    color: black;
+    text-align: center;
+    position: bottom!important;
+}
+
+.footer h5 {
+    color: #add8e6;
+}
+
+.footer a {
+    color: black;
+}
+
+.footer a:hover {
+    color: white; 
+}
+
+.footer img {
+    margin: 0 10px;
+}
+
+#testimonials {
+    background-color: #add8e6;
+    color: black;
+    position: relative;
+    margin-bottom: 50px;
+    border-radius: 35px;
+}
+
+#testimonials h2 {
+    color: black;
+}
+
+#testimonials blockquote {
+    border-left: 5px solid white;
+    padding-left: 20px;
+}
+
+#testimonials blockquote p {
+    font-size: 1.2em;
+    line-height: 1.6;
+    color: black;
+}
+
+#testimonials blockquote footer {
+    color: black;
+    font-size: 1em;
+    text-align: right;
+}
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+h1, h2 {
+    color: #add8e6!important;
+}
+
+form {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+form label {
+    font-weight: bold;
+    color: #add8e6;
+}
+
+form input[type="text"], form input[type="email"], form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+form input[type="submit"] {
+    background-color: #333;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+form input[type="submit"]:hover {
+    background-color: #add8e6;
+}
+
+.list-group {
+    list-style-type: none;
+    padding: 0;
+}
+
+.list-group-item {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.list-group-item:last-child {
+    border-bottom: none;
+}
+
+#scrollButton {
+    position: fixed;
+    bottom: 20px;
+    right: 30px;
+    display: none;
+    padding: 15px;
+    border: none;
+    border-radius: 50%;
+    background-color: #555;
+    color: white;
+    cursor: pointer;
+    z-index: 999999;
+    transition: background-color 1s;
+}
+
+#scrollButton:hover {
+    background-color: #333;
+}
+
+.table {
+    width: 100%;
+    margin-bottom: 20px;
+    background-color: #add8e6!important;
+    border-radius: 35px;
+}
+
+.table th {
+    background-color: #add8e6!important;
+    color: black;
+    font-weight: bold;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.card-header {
+    background-color: #add8e6!important;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.card-body {
+    background-color: #add8e6!important;
+    border: 1px solid #dee2e6;
+    border-top: none;
+}
+#cookieConsent {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    max-width: 400px;
+    margin: auto;
+    background-color: #add8e6;
+    color: #333;
+    padding: 1em;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    z-index: 1000;
+    display: none; 
+    border-radius: 35px;
+}
+
+#cookieConsent .container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 1em;
+}
+
+#cookieConsent .btn-main {
+    background-color: white  !important;
+    color: #add8e6!important;
+    border: none;
+    padding: 0.5em 1em;
+    text-decoration: none;
+    cursor: pointer;
+    border: white!important;
+}
+
+#cookieConsent .btn-main:hover {
+    background-color: #add8e6!important;
+    color: white!important;
+    border-color: white!important;
+}
