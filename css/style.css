@@ -1,89 +1,106 @@
-html{
+html {
     scroll-behavior: smooth;
 }
 
-body{
-        background-image: url("../img/beanstalk-dark.png")!important;
-        background-size: cover!important;
-        background-position: center!important;
-        background-repeat: no-repeat!important;
-        padding-top: 140px!important;
+body {
+    background-image: url("../img/beanstalk-dark.png")!important;
+    background-size: cover!important;
+    background-position: center!important;
+    background-repeat: no-repeat!important;
+    padding-top: 140px!important;
+    flex-direction: column!important;
+    display: flex!important;
+    min-height: 100vh!important;
 }
 
-.navbar{        
-        background-color: #add8e6!important; 
-        backdrop-filter: blur(100px)!important;
-        border-radius: 55px;
-        z-index: 1000!important;
-        position: fixed!important;
-        width: 100%!important;
+.nav-link {
+    color: white!important; 
+    border-radius: 15px;
+    border: 1px solid transparent; 
+    transition: border-color 0.5s ease;
+    font-weight: bold;
 }
 
-.navbar a:hover{
-        color: white!important;
+.nav-link:hover {
+    color: white;
+    background-color: #add8e6; 
+    border-color: white!important;
 }
 
-.navbar:visited{
-        color: white!important;
+.navbar {
+    background-color: #add8e6!important; 
+    backdrop-filter: blur(100px)!important;
+    border-radius: 55px;
+    z-index: 1000!important;
+    position: fixed!important;
+    width: 100%!important;
 }
 
-.nav-item:active .nav-link{
-        color: white!important;
+.navbar a:hover {
+    color: white!important;
+}   
+
+.btn{
+    color: #add8e6!important;
+    background-color: white!important;
+    border-color: #add8e6!important;
+    border-radius: 15px;
+    font-weight: bold;
 }
 
-.nav-item.active .nav-link:hover {
-        color: white !important;
+.btn:hover {
+    color: white!important;
+    background-color: #add8e6!important;
+    border-color: white!important;
 }
-
-.collapse .nav-link:hover {
-        color: white !important; 
-}      
 
 .jumbotron {
-        background-color: #add8e6 !important; 
-        color: black !important;
-        border-radius: 30px;
+    background-color: #add8e6 !important; 
+    color: black !important;
+    border-radius: 30px;
 }
 
 .jumbotron .display-4,
 .jumbotron .lead {
-        color: black !important;
-        text-decoration: underline;
+    color: black !important;
+    text-decoration: underline;
 }
 
 .jumbotron a.btn {
-        color: #add8e6; 
-        background-color: white;
-        border-color: white;
+    color: #add8e6; 
+    background-color: white;
+    border-color: white;
 }
 
 .jumbotron a.btn:hover {
-        color: white;
-        background-color: #add8e6; 
-        border-color: white;
+    color: white;
+    background-color: #add8e6; 
+    border-color: white;
+    transition: color 0.5s, background-color 0.5s;
 }
 
 .card {
-        border-color: #add8e6!important; 
-        border-radius: 55px;  
-        margin-bottom: 20px;
+    border-color: #add8e6!important; 
+    border-radius: 55px;  
+    margin-bottom: 20px;
 }
 
 .card .card-title {
-        color: #add8e6; 
+    color: #add8e6; 
 }
 
 .card .btn {
-        color: #add8e6; 
-        background-color: white;
-        border-color: #add8e6; 
+    color: #add8e6; 
+    background-color: white;
+    border-color: #add8e6; 
 }
 
 .card .btn:hover {
-        color: white;
-        background-color: #add8e6; 
-        border-color: white;
+    color: white;
+    background-color: #add8e6; 
+    border-color: white;
 }
+
 .footer {
     left: 0;
     bottom: 0;
@@ -237,6 +254,7 @@ form input[type="submit"]:hover {
     border: 1px solid #dee2e6;
     border-top: none;
 }
+
 #cookieConsent {
     position: fixed;
     bottom: 0;
@@ -273,4 +291,40 @@ form input[type="submit"]:hover {
     background-color: #add8e6!important;
     color: white!important;
     border-color: white!important;
+}
+
+.register-form {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    background-color: #add8e6;
+    color: black;
+    padding: 1em;
+    border-radius: 35px;
+}
+
+.register-form label {
+    font-weight: bold;
+    color: #add8e6;
+}
+
+.register-form input[type="text"], .register-form input[type="email"], .register-form input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.register-form input[type="submit"] {
+    background-color: #333;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.register-form input[type="submit"]:hover {
+    background-color: #add8e6;
 }
