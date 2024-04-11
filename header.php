@@ -13,20 +13,24 @@
   <header>
   <nav class="navbar navbar-expand-lg m-3 fixed-top" id="main-navbar">
       <div class="container-fluid py-3">
-          <a class="navbar-brand text-dark font-italic fw-bold fs-3 mx-3 mx-lg-5" href="index.html">
+          <a class="navbar-brand text-dark font-italic fw-bold fs-3 mx-3 mx-lg-5" href="index.php">
               <img src="img/logo.png" alt="Logo" width="30" height="30" class="d-inline-block align-top">
-              <span class="d-none d-lg-inline">GYM U.K.F</span>
-              <span class="d-inline d-lg-none logo-small">GymUKF</span>
+              <span class="d-none d-lg-inline">GymCold</span>
+              <span class="d-inline d-lg-none logo-small">GymCold</span>
           </a>
           <button class="navbar-toggler mx-3 mx-lg-5 border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
           </button>
-          <div class="collapse navbar-collapse justify-content-end mx-3 mx-lg-5" id="navbarNavAltMarkup">
-              <div class="navbar-nav">
-                  <a class="nav-link fw-bold fs-5 mx-2" href="index.html">Home</a>
-                  <a class="nav-link fw-bold fs-5 mx-2" href="gallery.html">Gallery</a>
-                  <a class="nav-link fw-bold fs-5 mx-2" href="contact.html">Contact</a>
-                  <a class="nav-link fw-bold fs-5 mx-2" href="faq.html">FAQ</a>
+          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <div class="navbar-nav mr-auto">
+                  <a class="nav-link fs-5 mx-2" href="index.php ">Domov</a>
+                  <a class="nav-link fs-5 mx-2" href="blog.php">Blog</a>
+                  <a class="nav-link fs-5 mx-2" href="create_post.php">Vytvoriť príspevok</a>
+                  <a class="nav-link fs-5 mx-2" href="contact.php">Contact</a>
+              </div>
+              <div class="navbar-nav ml-auto">
+                  <a class="nav-link fs-5 mx-2" href="login.php">Login</a>
+                  <a class="nav-link fs-5 mx-2" href="profile.php">Signed in as: <span id="username">Username</span></a>
               </div>
           </div>
       </div>
