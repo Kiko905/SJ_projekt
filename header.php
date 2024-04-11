@@ -21,17 +21,34 @@
           <button class="navbar-toggler mx-3 mx-lg-5 border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
           </button>
-          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-              <div class="navbar-nav mr-auto">
-                  <a class="nav-link fs-5 mx-2" href="index.php ">Domov</a>
-                  <a class="nav-link fs-5 mx-2" href="blog.php">Blog</a>
-                  <a class="nav-link fs-5 mx-2" href="create_post.php">Vytvoriť príspevok</a>
-                  <a class="nav-link fs-5 mx-2" href="contact.php">Contact</a>
-              </div>
-              <div class="navbar-nav ml-auto">
-                  <a class="nav-link fs-5 mx-2" href="login.php">Login</a>
-                  <a class="nav-link fs-5 mx-2" href="profile.php">Signed in as: <span id="username">Username</span></a>
-              </div>
+          <div class="collapse navbar-collapse" id="collapsibleNavbar">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item <?php if ($currentPage === 'index.php') echo 'active'; ?>">
+         <a class="nav-link" href="index.php">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="blog.php">Blog</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="create_post.php">Vytvoriť príspevok</a>
+      </li>
+    </ul>
+    <ul class="navbar-nav">
+      <?php if (isset($_SESSION['username'])) { ?>
+        <li class="nav-item">
+          <a class="nav-link" href="logout.php">Logout</a>
+        </li>
+        <li class="nav-item">
+          <span class="nav-link">Logged in as: <?php echo $_SESSION['username']; ?></span>
+        </li>
+      <?php } else { ?>
+        <li class="nav-item">
+          <a class="nav-link" href="login.php">Login</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="register.php">Register</a>
+        </li>
+      <?php } ?>
           </div>
       </div>
   </nav>
