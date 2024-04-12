@@ -6,7 +6,7 @@ class Login {
         $this->conn = $conn;
     }
 
-    public function prihlasit($pouzivatelskeMeno, $heslo) {
+    public function login($pouzivatelskeMeno, $heslo) {
         $sql = "SELECT * FROM pouzivatelia WHERE pouzivatelske_meno=:pouzivatelskeMeno";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindValue(':pouzivatelskeMeno', $pouzivatelskeMeno, PDO::PARAM_STR);
