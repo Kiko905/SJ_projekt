@@ -6,17 +6,17 @@ class Login {
         $this->conn = $conn;
     }
 
-    public function login($pouzivatelskeMeno, $heslo) {
-        $sql = "SELECT * FROM pouzivatelia WHERE pouzivatelske_meno=:pouzivatelskeMeno";
+    public function login($username, $password) {
+        $sql = "SELECT * FROM users WHERE username=:username";
         $stmt = $this->conn->prepare($sql);
-        $stmt->bindValue(':pouzivatelskeMeno', $pouzivatelskeMeno, PDO::PARAM_STR);
+        $stmt->bindValue(':username', $username, PDO::PARAM_STR);
         $stmt->execute();
         $result = $stmt->fetch();
 
         if ($result) {
-            if (password_verify($heslo, $result['heslo'])) {
+            if (password_verify($password, $result['password'])) {
                 $_SESSION['user_id'] = $result['id'];
-                $_SESSION['pouzivatelske_meno'] = $result['pouzivatelske_meno'];
+                $_SESSION['username'] = $result['username'];
                 header('Location: index.php');
                 return true;
             } else {
@@ -55,7 +55,7 @@ class Register {
             $result = $stmt->execute(['username' => $username, 'email' => $email, 'password' => $hashed_password]);
 
             if ($result) {
-                return '<div class="success-message">Registrácia úspešná</div>';
+                header('Location: login.php');
             } else {
                 return '<div class="error-message">Registrácia zlyhala</div>';
             }
