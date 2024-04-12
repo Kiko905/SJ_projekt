@@ -8,7 +8,7 @@ require_once 'header.php';
 require_once 'db_connection.php';
 require_once 'functions.php';
 session_start();
-$user = new User($conn);
+$user = new Login($conn);
 
 if (isset($_POST['submit'])) {
     $username = $_POST['username'];
@@ -29,6 +29,16 @@ if (isset($_POST['submit'])) {
 
 <main class="main">
     <div class="container">
+    <h1>Login</h1>
+    <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
+        <label for="username">Username:</label>
+        <input type="text" name="username" id="username">
+        <br>
+        <label for="password">Password:</label>
+        <input type="password" name="password" id="password">
+        <br>
+        <input type="submit" name="submit" value="Login" class="btn button-farba">
+    </form>
     </div>
 </main>
 
