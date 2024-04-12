@@ -62,7 +62,7 @@ body {
 
 .jumbotron .display-4,
 .jumbotron .lead {
-    color: black !important;
+    color: black !important;    
     text-decoration: underline;
 }
 
@@ -175,7 +175,7 @@ form label {
     color: #add8e6;
 }
 
-form input[type="text"], form input[type="email"], form textarea {
+form input[type="text"], form input[type="email"],form input[type="password"], form textarea {
     width: 100%;
     padding: 10px;
     margin-bottom: 10px;

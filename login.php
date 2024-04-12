@@ -1,4 +1,9 @@
 <?php 
+// Turn on all error reporting
+error_reporting(E_ALL);
+
+// Display errors in the output
+ini_set('display_errors', 1);
 require_once 'header.php'; 
 require_once 'db_connection.php';
 require_once 'functions.php';
@@ -28,3 +33,4 @@ if (isset($_POST['submit'])) {
 </main>
 
 <?php require_once 'footer.php'; ?>
+}

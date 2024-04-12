@@ -39,7 +39,7 @@
           <a class="nav-link" href="logout.php">Logout</a>
         </li>
         <li class="nav-item">
-          <span class="nav-link">Logged in as: <?php echo $_SESSION['username']; ?></span>
+          <a href="profile.php" class="nav-link">Logged in as: <?php echo $_SESSION['username']; ?></a>
         </li>
       <?php } else { ?>
         <li class="nav-item">
