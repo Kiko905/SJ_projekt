@@ -63,3 +63,60 @@ class Register {
     }
 }
 ?>
+<?php
+class Order {
+    private $conn;
+
+    public function __construct($conn) {
+        $this->conn = $conn;
+    }
+
+    public function getOrders() {
+        $sql = "SELECT * FROM orders";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
+    public function getOrder($user_id) {
+        $sql = "SELECT * FROM orders WHERE user_id = :user_id";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindValue(':user_id', $user_id);
+        $stmt->execute();
+        return $stmt->fetch();
+    }
+
+    public function createOrUpdateOrder($user_id, $product_id, $quantity) {
+        $sql = "SELECT * FROM orders WHERE user_id = :user_id";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindValue(':user_id', $user_id);
+        $stmt->execute();
+        $order = $stmt->fetch();
+    
+        if ($order) {
+            $sql = "UPDATE orders SET product_id = :product_id, quantity = :quantity WHERE user_id = :user_id";
+        } else {
+            $sql = "INSERT INTO orders (user_id, product_id, quantity) VALUES (:user_id, :product_id, :quantity)";
+        }
+    
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindValue(':user_id', $user_id);
+        $stmt->bindValue(':product_id', $product_id);
+        $stmt->bindValue(':quantity', $quantity);
+        $stmt->execute();
+    }
+
+    public function deleteOrder($user_id) {
+        $sql = "DELETE FROM orders WHERE user_id = :user_id";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindValue(':user_id', $user_id);
+        $stmt->execute();
+    }
+    public function handleDeleteRequest() {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete'])) {
+            $this->order->deleteOrder($_POST['user_id']);
+            header('Location: orders.php');
+            exit;
+        }
+    }
+}

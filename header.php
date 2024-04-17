@@ -34,6 +34,9 @@
       <li class="nav-item">
         <a class="nav-link" href="create_post.php">Vytvoriť príspevok</a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" href="objednavky.php">Objednavky</a>
+      </li>
     </ul>
     <ul class="navbar-nav">
       <?php if (isset($_SESSION['username'])) { ?>
