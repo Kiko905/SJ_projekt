@@ -88,4 +88,31 @@ class Register {
         }
     }
 }
+
+class Post {
+    private $conn;
+
+    public function __construct($conn) {
+        $this->conn = $conn;
+    }
+
+    public function getAll() {
+        $query = 'SELECT * FROM posts ORDER BY created_at DESC';
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    public function create($title, $content, $image_path, $author, $user_id) {
+        $query = "INSERT INTO posts (title, content, image, author, user_id, created_at) VALUES (?, ?, ?, ?, ?, NOW())";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute([$title, $content, $image_path, $author, $user_id]);
+
+        // Check if it inserted correctly
+        if ($stmt->rowCount() == 1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+}
 ?>
