@@ -1,4 +1,3 @@
-<script src='SJ_projekt/js/app.js'></script> 
 <?php
 session_start();
 
@@ -57,7 +56,12 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
-    <h1><i class="fas fa-user"></i>Profile</h1>
+<h1>
+    <?php if ($_SESSION['role'] === 'admin'): ?>
+        <i class="fas fa-hammer"></i>
+    <?php endif; ?>
+    <i class="fas fa-user"></i>Profile
+        </h1>
         <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>" enctype="multipart/form-data">
             <!-- Display the user's data in input fields -->
             <label for="name"><i class="fas fa-user"></i> Name:</label>

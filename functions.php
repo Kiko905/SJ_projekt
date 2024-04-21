@@ -19,6 +19,7 @@ class Login {
                 $_SESSION['user_id'] = $result['id'];
                 $_SESSION['username'] = $result['username'];
                 $_SESSION['profile_picture'] = $result['profile_picture'];
+                $_SESSION['role'] = $result['role'];
                 header('Location: index.php');
                 return true;
             } else {
