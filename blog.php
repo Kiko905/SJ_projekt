@@ -36,10 +36,10 @@ require_once 'header.php';
                         <h2 class="card-title"><a href="#post-<?php echo $row['id']; ?>"><?php echo $row['title']; ?></a></h2>
                         <p class="card-text"><?php echo $row['content']; ?></p>
                         <p class="card-text"><small class="text-muted">By <?php echo $row['author']; ?> on <?php echo date('F j, Y', strtotime($row['created_at'])); ?></small></p>
-                        <?php if ($_SESSION['user_id'] == $row['user_id']) : ?>
-                            <a href="edit_post.php?id=<?php echo $row['id']; ?>" class="btn button-farba">Edit</a>
-                            <a href="delete_post.php?id=<?php echo $row['id'];?>" class="btn button-farba" onclick="return confirm('Are you sure you want to delete this post?')">Delete</a>
-                        <?php endif; ?>   
+                    <?php if ($_SESSION['user_id'] == $row['user_id'] || $_SESSION['role'] === 'admin') : ?>
+                        <a href="edit_post.php?id=<?php echo $row['id']; ?>" class="btn button-farba">Edit</a>
+                        <a href="delete_post.php?id=<?php echo $row['id'];?>" class="btn button-farba" onclick="return confirm('Are you sure you want to delete this post?')">Delete</a>
+                    <?php endif; ?>
                     </div>
                 </div>
             <?php endforeach; ?>
