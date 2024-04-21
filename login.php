@@ -10,6 +10,7 @@ require_once 'functions.php';
 session_start();
 $user = new Login($conn);
 
+
 if (isset($_POST['submit'])) {
     $username = $_POST['username'];
     $password = $_POST['password'];
@@ -20,6 +21,7 @@ if (isset($_POST['submit'])) {
         if ($user->login($username, $password)) {
             echo '<p>You have successfully logged in.</p>';
             echo '<a href="logout.php">Logout</a>';
+
         } else {
             echo '<p>Incorrect username or password.</p>';
         }

@@ -34,26 +34,31 @@
       <li class="nav-item">
         <a class="nav-link" href="create_post.php">Vytvoriť príspevok</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="objednavky.php">Objednavky</a>
-      </li>
     </ul>
-    <ul class="navbar-nav">
-      <?php if (isset($_SESSION['username'])) { ?>
-        <li class="nav-item">
-          <a class="nav-link" href="logout.php">Logout</a>
-        </li>
-        <li class="nav-item">
-          <a href="profile.php" class="nav-link">Logged in as: <?php echo $_SESSION['username']; ?></a>
-        </li>
-      <?php } else { ?>
-        <li class="nav-item">
-          <a class="nav-link" href="login.php">Login</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="register.php">Register</a>
-        </li>
-      <?php } ?>
+<ul class="navbar-nav">
+  <?php if (isset($_SESSION['username'])) { ?>
+    <li class="nav-item">
+      <a class="nav-link" href="logout.php">Logout</a>
+    </li>
+    <li class="nav-item">
+    <a href="profile.php" class="nav-link">
+    Logged in as: <?php echo $_SESSION['username']; ?>
+    <?php if (!empty($_SESSION['profile_picture'])): ?>
+        <img class="profile-picture" src="<?php echo $_SESSION['profile_picture']; ?>" alt="Profile Picture">
+    <?php else: ?>
+        <img class="profile-picture" src="default.jpg" alt="Default Profile Picture">
+    <?php endif; ?>
+</a>
+    </li>
+  <?php } else { ?>
+    <li class="nav-item">
+      <a class="nav-link" href="login.php">Login</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="register.php">Register</a>
+    </li>
+  <?php } ?>
+</ul>
           </div>
       </div>
   </nav>

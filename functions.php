@@ -6,17 +6,19 @@ class Login {
         $this->conn = $conn;
     }
 
+    
     public function login($username, $password) {
         $sql = "SELECT * FROM users WHERE username=:username";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindValue(':username', $username, PDO::PARAM_STR);
         $stmt->execute();
         $result = $stmt->fetch();
-
+    
         if ($result) {
             if (password_verify($password, $result['password'])) {
                 $_SESSION['user_id'] = $result['id'];
                 $_SESSION['username'] = $result['username'];
+                $_SESSION['profile_picture'] = $result['profile_picture'];
                 header('Location: index.php');
                 return true;
             } else {
@@ -26,10 +28,33 @@ class Login {
             return false;
         }
     }
+    public function deleteAccount() {
+        // Check if the delete button was clicked
+        if (isset($_POST['delete_account'])) {
+            // Delete the user's account from the database
+            $sql = "DELETE FROM users WHERE id = :id";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindValue(':id', $_SESSION['user_id']);
+            $stmt->execute();
+    
+            // Log out the user and redirect to the login page
+            session_destroy();
+            header('Location: login.php');
+            exit;
+        }
+    }
+    
+    public function updateProfilePicture($user_id, $profile_picture) {
+        $sql = "UPDATE users SET profile_picture = :profile_picture WHERE id = :user_id";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindValue(':user_id', $user_id);
+        $stmt->bindValue(':profile_picture', $profile_picture);
+        $stmt->execute();
+    
+        // Update the profile picture in the session
+        $_SESSION['profile_picture'] = $profile_picture;
+    }
 }
-?>
-
-<?php
 class Register {
     private $conn;
 
@@ -63,60 +88,3 @@ class Register {
     }
 }
 ?>
-<?php
-class Order {
-    private $conn;
-
-    public function __construct($conn) {
-        $this->conn = $conn;
-    }
-
-    public function getOrders() {
-        $sql = "SELECT * FROM orders";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->execute();
-        return $stmt->fetchAll();
-    }
-
-    public function getOrder($user_id) {
-        $sql = "SELECT * FROM orders WHERE user_id = :user_id";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->bindValue(':user_id', $user_id);
-        $stmt->execute();
-        return $stmt->fetch();
-    }
-
-    public function createOrUpdateOrder($user_id, $product_id, $quantity) {
-        $sql = "SELECT * FROM orders WHERE user_id = :user_id";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->bindValue(':user_id', $user_id);
-        $stmt->execute();
-        $order = $stmt->fetch();
-    
-        if ($order) {
-            $sql = "UPDATE orders SET product_id = :product_id, quantity = :quantity WHERE user_id = :user_id";
-        } else {
-            $sql = "INSERT INTO orders (user_id, product_id, quantity) VALUES (:user_id, :product_id, :quantity)";
-        }
-    
-        $stmt = $this->conn->prepare($sql);
-        $stmt->bindValue(':user_id', $user_id);
-        $stmt->bindValue(':product_id', $product_id);
-        $stmt->bindValue(':quantity', $quantity);
-        $stmt->execute();
-    }
-
-    public function deleteOrder($user_id) {
-        $sql = "DELETE FROM orders WHERE user_id = :user_id";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->bindValue(':user_id', $user_id);
-        $stmt->execute();
-    }
-    public function handleDeleteRequest() {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete'])) {
-            $this->order->deleteOrder($_POST['user_id']);
-            header('Location: orders.php');
-            exit;
-        }
-    }
-}
