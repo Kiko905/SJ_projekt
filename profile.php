@@ -61,8 +61,14 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
         <i class="fas fa-hammer"></i>
     <?php endif; ?>
     <i class="fas fa-user"></i>Profile
-        </h1>
+</h1>
+
+
         <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>" enctype="multipart/form-data">
+        <!-- Add button for admin panel -->
+<?php if ($_SESSION['role'] === 'admin'): ?>
+    <a href="admin_panel.php" class="btn btn-light btn-lg">Admin Panel</a>
+<?php endif; ?><br>
             <!-- Display the user's data in input fields -->
             <label for="name"><i class="fas fa-user"></i> Name:</label>
             <input type="text" name="name" value="<?php echo $user['username']; ?>"><br>
@@ -81,7 +87,7 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
                 <input type="file" id="profile_picture" name="profile_picture" style="display: none;">
             </label>
             <br>
-            <input type="submit" value="Save">
+            <input type="submit" class="btn"value="Save">
         </form>
 
         <!-- Add a delete account button -->
