@@ -1,7 +1,7 @@
 <?php 
 require_once 'header.php'; 
 require_once 'db_connection.php'; 
-require_once 'functions.php';
+require_once 'classes.php';
 
 
         $user = new Register($conn);

@@ -6,7 +6,7 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 require_once 'header.php'; 
 require_once 'db_connection.php';
-require_once 'functions.php';
+require_once 'classes.php';
 session_start();
 
 $user = new Login($conn);
