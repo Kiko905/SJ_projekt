@@ -3,9 +3,9 @@
 // Start session
 session_start();
 
-// Include db_connection.php and functions.php
+// Include db_connection.php and classes.php
 require_once 'db_connection.php';
-require_once 'functions.php';
+require_once 'classes.php';
 
 // Check if user is logged in and is an admin
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
