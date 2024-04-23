@@ -1,8 +1,8 @@
 <?php 
-// Turn on all error reporting
+// Zapnúť všetky hlásenia o chybách
 error_reporting(E_ALL);
 
-// Display errors in the output
+// Zobraziť chyby výstupu
 ini_set('display_errors', 1);
 require_once 'header.php'; 
 require_once 'db_connection.php';
@@ -17,14 +17,14 @@ if (isset($_POST['submit'])) {
     $password = $_POST['password'];
 
     if (empty($username) || empty($password)) {
-        echo '<p>Please enter both username and password.</p>';
+        echo '<p>Prosím, zadajte používateľské meno a heslo.</p>';
     } else {
         if ($user->login($username, $password)) {
-            echo '<p>You have successfully logged in.</p>';
-            echo '<a href="logout.php">Logout</a>';
+            echo '<p>Boli ste úspešne prihlásený.</p>';
+            echo '<a href="logout.php">Odhlásiť sa</a>';
 
         } else {
-            echo '<p>Incorrect username or password.</p>';
+            echo '<p>Nesprávne používateľské meno alebo heslo.</p>';
         }
     }
 }
@@ -32,15 +32,15 @@ if (isset($_POST['submit'])) {
 
 <main class="main">
     <div class="container">
-    <h1>Login</h1>
+    <h1>Prihlásenie</h1>
     <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
-        <label for="username">Username:</label>
+        <label for="username">Používateľské meno:</label>
         <input type="text" name="username" id="username">
         <br>
-        <label for="password">Password:</label>
+        <label for="password">Heslo:</label>
         <input type="password" name="password" id="password">
         <br>
-        <input type="submit" name="submit" value="Login" class="btn button-farba">
+        <input type="submit" name="submit" value="Prihlásiť sa" class="btn button-farba">
     </form>
     </div>
 </main>
