@@ -6,14 +6,14 @@ class Login {
         $this->conn = $conn;
     }
 
-    
+    // Prihlásenie používateľa
     public function login($username, $password) {
         $sql = "SELECT * FROM users WHERE username=:username";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindValue(':username', $username, PDO::PARAM_STR);
         $stmt->execute();
         $result = $stmt->fetch();
-    
+
         if ($result) {
             if (password_verify($password, $result['password'])) {
                 $_SESSION['user_id'] = $result['id'];
@@ -29,33 +29,37 @@ class Login {
             return false;
         }
     }
+
+    // Zmazanie používateľského účtu
     public function deleteAccount() {
-        // Check if the delete button was clicked
+        // Skontrolujte, či bolo kliknuté na tlačidlo "zmazať účet"
         if (isset($_POST['delete_account'])) {
-            // Delete the user's account from the database
+            // Zmažte používateľov účet z databázy
             $sql = "DELETE FROM users WHERE id = :id";
             $stmt = $this->conn->prepare($sql);
             $stmt->bindValue(':id', $_SESSION['user_id']);
             $stmt->execute();
-    
-            // Log out the user and redirect to the login page
+
+            // Odhláste používateľa a presmerujte na prihlasovaciu stránku
             session_destroy();
             header('Location: login.php');
             exit;
         }
     }
-    
+
+    // Aktualizácia profilového obrázka
     public function updateProfilePicture($user_id, $profile_picture) {
         $sql = "UPDATE users SET profile_picture = :profile_picture WHERE id = :user_id";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindValue(':user_id', $user_id);
         $stmt->bindValue(':profile_picture', $profile_picture);
         $stmt->execute();
-    
-        // Update the profile picture in the session
+
+        // Aktualizujte profilový obrázok v relácii
         $_SESSION['profile_picture'] = $profile_picture;
     }
 }
+
 class Register {
     private $conn;
 
@@ -63,6 +67,7 @@ class Register {
         $this->conn = $conn;
     }
 
+    // Registrácia nového používateľa
     public function register($username, $email, $password) {
         $sql = "SELECT * FROM users WHERE username=:username OR email=:email";
         $stmt = $this->conn->prepare($sql);
@@ -72,7 +77,7 @@ class Register {
         $result = $stmt->fetchAll();
 
         if (count($result) > 0) {
-            return 'Username or email already exists.';
+            return 'Používateľské meno alebo email už existuje.';
         } else {
             $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
@@ -96,18 +101,21 @@ class Post {
         $this->conn = $conn;
     }
 
+    // Získanie všetkých príspevkov
     public function getAll() {
         $query = 'SELECT * FROM posts ORDER BY created_at DESC';
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    // Vytvorenie nového príspevku
     public function create($title, $content, $image_path, $author, $user_id) {
         $query = "INSERT INTO posts (title, content, image, author, user_id, created_at) VALUES (?, ?, ?, ?, ?, NOW())";
         $stmt = $this->conn->prepare($query);
         $stmt->execute([$title, $content, $image_path, $author, $user_id]);
 
-        // Check if it inserted correctly
+        // Skontrolujte, či sa vložilo správne
         if ($stmt->rowCount() == 1) {
             return true;
         } else {
@@ -123,11 +131,35 @@ class User {
         $this->conn = $conn;
     }
 
+    // Získanie všetkých používateľov
     public function getAll() {
         $query = 'SELECT * FROM users';
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    public function updateProfile($userId, $newName, $newEmail, $profilePicturePath = null) {
+        $sql = "UPDATE users SET username = :username, email = :email WHERE id = :id";
+        if ($profilePicturePath) {
+            $sql = "UPDATE users SET username = :username, email = :email, profile_picture = :profile_picture WHERE id = :id";
+        }
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindValue(':username', $newName);
+        $stmt->bindValue(':email', $newEmail);
+        if ($profilePicturePath) {
+            $stmt->bindValue(':profile_picture', $profilePicturePath);
+        }
+        $stmt->bindValue(':id', $userId);
+        $stmt->execute();
+    }
+
+    public function getUserById($userId) {
+        $sql = "SELECT * FROM users WHERE id = :id";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindValue(':id', $userId);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
 }
 ?>
