@@ -46,7 +46,7 @@
     <?php if (!empty($_SESSION['profile_picture'])): ?>
         <img class="profile-picture" src="<?php echo $_SESSION['profile_picture']; ?>" alt="Profile Picture">
     <?php else: ?>
-        <img class="profile-picture" src="default.jpg" alt="Default Profile Picture">
+        <img class="profile-picture" src="img/default.jpg" alt="Default Profile Picture">
     <?php endif; ?>
 </a>
     </li>
