@@ -25,7 +25,7 @@
             <p>Zisti viac o tom ako dosiahnuť svoje ciele.</p>
           </div>
           <div class="col-lg-6 d-flex align-items-center justify-content-center">
-            <a class="btn btn-light btn-lg" href="contact.html" role="button">Kontaktuj nás!</a>
+            <a class="btn btn-light btn-lg" href="contact.php" role="button">Kontaktuj nás!</a>
           </div>
         </div>
       </div>
@@ -39,7 +39,7 @@
             <div class="card-body">
               <h5 class="card-title">Kardiovaskulárny program</h5>
               <p class="card-text">Náš kardiovaskulárny program je navrhnutý tak, aby zlepšil zdravie vášho srdca a vytrvalosť. Zahrňuje rôzne cvičenia, ako je beh, cyklistika a plávanie.</p>
-              <a href="kontakt.html" class="btn btn-primary">Dozvedieť sa viac</a>
+              <a href="contact.php" class="btn btn-primary">Dozvedieť sa viac</a>
             </div>
           </div>
         </div>
@@ -49,7 +49,7 @@
             <div class="card-body">
               <h5 class="card-title">Program silového tréningu</h5>
               <p class="card-text">Náš program silového tréningu je navrhnutý tak, aby zlepšil silu a vytrvalosť vašich svalov. Zahrňuje cvičenia, ako je zdvíhanie činiek a odporový tréning.</p>
-              <a href="kontakt.html" class="btn btn-primary">Dozvedieť sa viac</a>
+              <a href="contact.php" class="btn btn-primary">Dozvedieť sa viac</a>
             </div>
           </div>
         </div>
@@ -59,7 +59,7 @@
             <div class="card-body">
               <h5 class="card-title">Program flexibility</h5>
               <p class="card-text">Náš program flexibility je navrhnutý tak, aby zlepšil vašu flexibilitu a rovnováhu. Zahrňuje cvičenia, ako je joga a strečing.</p>
-              <a href="kontakt.html" class="btn btn-primary">Dozvedieť sa viac</a>
+              <a href="contact.php" class="btn btn-primary">Dozvedieť sa viac</a>
             </div>
           </div>
         </div>
