@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Môj blog</title>
+  <title>My Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
@@ -32,7 +32,7 @@
         <a class="nav-link" href="blog.php">Blog</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="create_post.php">Vytvoriť príspevok</a>
+        <a class="nav-link" href="create_post.php">Create Post</a>
       </li>
     </ul>
 <ul class="navbar-nav">
@@ -62,4 +62,4 @@
           </div>
       </div>
   </nav>
-</header> 
+</header>
