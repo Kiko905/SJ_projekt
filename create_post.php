@@ -3,6 +3,7 @@
 session_start();
 
 // Zahrň db_connection.php a classes.php
+require_once 'header.php';
 require_once 'db_connection.php';
 require_once 'classes.php';
 
@@ -26,16 +27,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Nahraj obrázok
     $image_path = '';
     if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
-        $image_name = $_FILES['image']['name'];
-        $tmp_name = $_FILES['image']['tmp_name'];
-        $upload_dir = 'uploads/';
+        $image_path = $post->uploadImage($_FILES['image']);
 
-        // Presuň obrázok
-        if (move_uploaded_file($tmp_name, $upload_dir . $image_name)) {
-            $image_path = $upload_dir . $image_name;
-        } else {
+        if ($image_path === 'Upload directory is not writable' || $image_path === 'Failed to move uploaded file') {
             // Chyba pri nahrávaní
-            echo "Chyba pri nahrávaní obrázka.";
+            echo "Chyba pri nahrávaní obrázka: " . $image_path;
+            exit();
         }
     }
 
@@ -49,9 +46,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo "Chyba pri vytváraní príspevku.";
     }
 }
-
-// Zahrň hlavičku
-require_once 'header.php';
 ?>
 
 <main>
