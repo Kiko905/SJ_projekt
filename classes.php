@@ -20,6 +20,7 @@ class Login {
                 $_SESSION['username'] = $result['username'];
                 $_SESSION['profile_picture'] = $result['profile_picture'];
                 $_SESSION['role'] = $result['role'];
+                $_SESSION['email'] = $result['email'];
                 header('Location: index.php');
                 return true;
             } else {
@@ -122,6 +123,66 @@ class Post {
             return false;
         }
     }
+    public function uploadImage($image) {
+        $image_name = $image['name'];
+        $tmp_name = $image['tmp_name'];
+        $upload_dir = 'uploads/';
+
+        if (!is_dir($upload_dir)) {
+            mkdir($upload_dir, 0777, true);
+        }
+
+        if (!is_writable($upload_dir)) {
+            return 'Upload directory is not writable';
+        }
+
+        if (move_uploaded_file($tmp_name, $upload_dir . $image_name)) {
+            $image_path = $upload_dir . $image_name;
+
+            // Resize image
+            list($width, $height) = getimagesize($image_path);
+            $new_width = 500; 
+            $new_height = ($height / $width) * $new_width; 
+
+            $src = imagecreatefromstring(file_get_contents($image_path));
+            $dst = imagecreatetruecolor($new_width, $new_height);
+
+            imagecopyresampled($dst, $src, 0, 0, 0, 0, $new_width, $new_height, $width, $height);
+            imagedestroy($src);
+
+            imagejpeg($dst, $image_path); 
+            imagedestroy($dst);
+
+            return $image_path;
+        } else {
+            return 'Failed to move uploaded file';
+        }
+    }
+
+    public function deletePost($postId) {
+        $stmt = $this->conn->prepare("DELETE FROM posts WHERE id = :id");
+        $stmt->bindValue(':id', $postId);
+        return $stmt->execute();
+    }
+
+    public function editPost($postId, $title, $content, $image) {
+        $stmt = $this->conn->prepare("UPDATE posts SET title = :title, content = :content, image = :image WHERE id = :id");
+        $stmt->bindValue(':title', $title);
+        $stmt->bindValue(':content', $content);
+        $stmt->bindValue(':image', $image);
+        $stmt->bindValue(':id', $postId);
+        return $stmt->execute();
+    }
+
+    public function getPost($postId) {
+        $sql = "SELECT * FROM posts WHERE id = :id";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindValue(':id', $postId);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+    
+
 }
 
 class User {
@@ -160,6 +221,24 @@ class User {
         $stmt->execute();
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
+
+    public function deleteUser($userId) {
+        $sql = "DELETE FROM users WHERE id = :id";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindValue(':id', $userId);
+        $stmt->execute();
+    }
+
+    
+    public function saveMessage($subject, $message, $user_id) {
+        $sql = "INSERT INTO messages (subject, message, user_id) VALUES (:subject, :message, :user_id)";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindValue(':subject', $subject);
+        $stmt->bindValue(':message', $message);
+        $stmt->bindValue(':user_id', $user_id);
+        return $stmt->execute();
+    }
+
 
 }
 ?>
