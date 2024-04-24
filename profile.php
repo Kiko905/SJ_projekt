@@ -70,7 +70,7 @@ $userData = $user->getUserById($_SESSION['user_id']);
 </form>
 
 <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>" onsubmit="return confirm('Are you sure you want to delete your account? This action cannot be undone.');">
-            <input type="submit" class="delete-button" name="delete_account" value="Delete Account">
+            <input type="submit" class="btn delete-button" name="delete_account" value="Delete Account">
         </form>
 
 </body>
