@@ -138,21 +138,6 @@ class Post {
 
         if (move_uploaded_file($tmp_name, $upload_dir . $image_name)) {
             $image_path = $upload_dir . $image_name;
-
-            // Resize image
-            list($width, $height) = getimagesize($image_path);
-            $new_width = 500; 
-            $new_height = ($height / $width) * $new_width; 
-
-            $src = imagecreatefromstring(file_get_contents($image_path));
-            $dst = imagecreatetruecolor($new_width, $new_height);
-
-            imagecopyresampled($dst, $src, 0, 0, 0, 0, $new_width, $new_height, $width, $height);
-            imagedestroy($src);
-
-            imagejpeg($dst, $image_path); 
-            imagedestroy($dst);
-
             return $image_path;
         } else {
             return 'Failed to move uploaded file';

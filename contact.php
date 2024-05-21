@@ -6,6 +6,11 @@
 
     $user = new User($conn);
 
+    if (!isset($_SESSION['user_id'])) {
+        header('Location: login.php');
+        exit;
+    }
+
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $subject = $_POST['subject'];
         $message = $_POST['message'];
