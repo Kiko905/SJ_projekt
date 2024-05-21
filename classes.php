@@ -224,6 +224,32 @@ class User {
         return $stmt->execute();
     }
 
-
+    public function deleteUserAdmin($userId) {
+        $stmt = $this->conn->prepare("DELETE FROM users WHERE id = :id");
+        $stmt->bindValue(':id', $userId);
+        return $stmt->execute();
+    }
+    
+    public function editUser($userId, $username, $email) {
+        $stmt = $this->conn->prepare("UPDATE users SET username = :username, email = :email WHERE id = :id");
+        $stmt->bindValue(':username', $username);
+        $stmt->bindValue(':email', $email);
+        $stmt->bindValue(':id', $userId);
+        return $stmt->execute();
+    }
+    
+    public function getUser($userId) {
+        $sql = "SELECT * FROM users WHERE id = :id";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindValue(':id', $userId);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+    
+    public function grantAdmin($userId) {
+        $stmt = $this->conn->prepare("UPDATE users SET role = 'admin' WHERE id = :id");
+        $stmt->bindValue(':id', $userId);
+        return $stmt->execute();
+    }
 }
 ?>

@@ -9,6 +9,15 @@ $user = new User($conn);
 
 // Check if form is submitted
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Check if delete account button was clicked
+    if (isset($_POST['delete_account'])) {
+        $user->deleteUser($_SESSION['user_id']);
+        // Destroy session and redirect to login page
+        session_destroy();
+        header('Location: login.php');
+        exit();
+    }
+
     // Get new name and email from form data
     $newName = $_POST['name'];
     $newEmail = $_POST['email'];
@@ -69,9 +78,9 @@ $userData = $user->getUserById($_SESSION['user_id']);
     <input type="submit" class="btn btn-light btn-lg" value="Uložiť zmeny">
 </form>
 
-<form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>" onsubmit="return confirm('Are you sure you want to delete your account? This action cannot be undone.');">
-            <input type="submit" class="btn delete-button" name="delete_account" value="Delete Account">
-        </form>
+<form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>" onsubmit="return confirm('Ste si istý, že chcete vymazať svoj účet? Táto akcia je nevratná.');">
+    <input type="submit" class="btn delete-button" name="delete_account" value="Vymazať účet">
+</form>
 
 </body>
 </html>
