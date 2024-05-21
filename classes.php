@@ -208,6 +208,11 @@ class User {
     }
 
     public function deleteUser($userId) {
+        $sql = "DELETE FROM messages WHERE user_id = :id";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindValue(':id', $userId);
+        $stmt->execute();
+    
         $sql = "DELETE FROM users WHERE id = :id";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindValue(':id', $userId);
@@ -224,11 +229,6 @@ class User {
         return $stmt->execute();
     }
 
-    public function deleteUserAdmin($userId) {
-        $stmt = $this->conn->prepare("DELETE FROM users WHERE id = :id");
-        $stmt->bindValue(':id', $userId);
-        return $stmt->execute();
-    }
     
     public function editUser($userId, $username, $email) {
         $stmt = $this->conn->prepare("UPDATE users SET username = :username, email = :email WHERE id = :id");

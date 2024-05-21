@@ -11,7 +11,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
 $user = new User($conn);
 
 if (isset($_GET['delete_id'])) {
-    $user->deleteUserAdmin($_GET['delete_id']);
+    $user->deleteUser($_GET['delete_id']);
 } elseif (isset($_GET['grant_admin_id'])) {
     $user->grantAdmin($_GET['grant_admin_id']);
 } elseif (isset($_POST['edit'])) {
