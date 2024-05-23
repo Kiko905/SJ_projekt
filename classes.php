@@ -33,15 +33,15 @@ class Login {
 
     // Zmazanie používateľského účtu
     public function deleteAccount() {
-        // Skontrolujte, či bolo kliknuté na tlačidlo "zmazať účet"
+        // Skontroluje, či bolo kliknuté na tlačidlo "zmazať účet"
         if (isset($_POST['delete_account'])) {
-            // Zmažte používateľov účet z databázy
+            // Zmaže používateľov účet z databázy
             $sql = "DELETE FROM users WHERE id = :id";
             $stmt = $this->conn->prepare($sql);
             $stmt->bindValue(':id', $_SESSION['user_id']);
             $stmt->execute();
 
-            // Odhláste používateľa a presmerujte na prihlasovaciu stránku
+            // Odhlásenie používateľa a presmerovanie na prihlasovaciu stránku
             session_destroy();
             header('Location: login.php');
             exit;
@@ -123,6 +123,8 @@ class Post {
             return false;
         }
     }
+
+    // Nahranie obrázka
     public function uploadImage($image) {
         $image_name = $image['name'];
         $tmp_name = $image['tmp_name'];
@@ -133,23 +135,25 @@ class Post {
         }
 
         if (!is_writable($upload_dir)) {
-            return 'Upload directory is not writable';
+            return 'Uploadovací priečinok nie je zapisovateľný';
         }
 
         if (move_uploaded_file($tmp_name, $upload_dir . $image_name)) {
             $image_path = $upload_dir . $image_name;
             return $image_path;
         } else {
-            return 'Failed to move uploaded file';
+            return 'Nepodarilo sa presunúť nahraný súbor';
         }
     }
 
+    // Zmazanie príspevku
     public function deletePost($postId) {
         $stmt = $this->conn->prepare("DELETE FROM posts WHERE id = :id");
         $stmt->bindValue(':id', $postId);
         return $stmt->execute();
     }
 
+    // Úprava príspevku
     public function editPost($postId, $title, $content, $image) {
         $stmt = $this->conn->prepare("UPDATE posts SET title = :title, content = :content, image = :image WHERE id = :id");
         $stmt->bindValue(':title', $title);
@@ -159,6 +163,7 @@ class Post {
         return $stmt->execute();
     }
 
+    // Získanie konkrétneho príspevku
     public function getPost($postId) {
         $sql = "SELECT * FROM posts WHERE id = :id";
         $stmt = $this->conn->prepare($sql);
@@ -166,8 +171,6 @@ class Post {
         $stmt->execute();
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
-    
-
 }
 
 class User {
@@ -184,6 +187,8 @@ class User {
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    // Aktualizácia používateľského profilu
     public function updateProfile($userId, $newName, $newEmail, $profilePicturePath = null) {
         $sql = "UPDATE users SET username = :username, email = :email WHERE id = :id";
         if ($profilePicturePath) {
@@ -199,6 +204,7 @@ class User {
         $stmt->execute();
     }
 
+    // Získanie používateľa podľa ID
     public function getUserById($userId) {
         $sql = "SELECT * FROM users WHERE id = :id";
         $stmt = $this->conn->prepare($sql);
@@ -207,19 +213,20 @@ class User {
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
+    // Zmazanie používateľa
     public function deleteUser($userId) {
         $sql = "DELETE FROM messages WHERE user_id = :id";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindValue(':id', $userId);
         $stmt->execute();
-    
+
         $sql = "DELETE FROM users WHERE id = :id";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindValue(':id', $userId);
         $stmt->execute();
     }
 
-    
+    // Uloženie správy
     public function saveMessage($subject, $message, $user_id) {
         $sql = "INSERT INTO messages (subject, message, user_id) VALUES (:subject, :message, :user_id)";
         $stmt = $this->conn->prepare($sql);
@@ -229,7 +236,7 @@ class User {
         return $stmt->execute();
     }
 
-    
+    // Úprava používateľa
     public function editUser($userId, $username, $email) {
         $stmt = $this->conn->prepare("UPDATE users SET username = :username, email = :email WHERE id = :id");
         $stmt->bindValue(':username', $username);
@@ -237,7 +244,8 @@ class User {
         $stmt->bindValue(':id', $userId);
         return $stmt->execute();
     }
-    
+
+    // Získanie používateľa podľa ID
     public function getUser($userId) {
         $sql = "SELECT * FROM users WHERE id = :id";
         $stmt = $this->conn->prepare($sql);
@@ -245,7 +253,8 @@ class User {
         $stmt->execute();
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
-    
+
+    // Pridelenie administrátorských práv používateľovi
     public function grantAdmin($userId) {
         $stmt = $this->conn->prepare("UPDATE users SET role = 'admin' WHERE id = :id");
         $stmt->bindValue(':id', $userId);
