@@ -18,13 +18,13 @@ $post = new Post($conn);
 
 // Odoslať
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Získaj dáta
+    // Získa dáta odoslané formulárom
     $title = $_POST['title'];
     $content = $_POST['content'];
     $user_id = $_SESSION['user_id'];
     $author = $_SESSION['username'];
 
-    // Nahraj obrázok
+    // Nahrá obrázok
     $image_path = '';
     if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
         $image_path = $post->uploadImage($_FILES['image']);
@@ -36,9 +36,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
-    // Vlož príspevok do db
+    // Vloží príspevok do db
     if ($post->create($title, $content, $image_path, $author, $user_id)) {
-        // Presmeruj na blog
+        // Presmerovanie na blog
         header('Location: blog.php'); 
         exit();
     } else {
